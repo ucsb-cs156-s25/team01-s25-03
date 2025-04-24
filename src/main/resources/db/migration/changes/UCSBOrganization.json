@@ -1,0 +1,61 @@
+{
+    "databaseChangeLog": [
+      {
+        "changeSet": {
+          "id": "UCSBOrgs-1",
+          "author": "KadeW",
+          "preConditions": [
+            {
+              "onFail": "MARK_RAN"
+            },
+            {
+              "not": [
+                {
+                  "tableExists": {
+                    "tableName": "UCSBORGANIZATIONS"
+                  }
+                }
+              ]
+            }
+          ],
+          "changes": [
+            {
+              "createTable": {
+                "columns": [
+                  {
+                    "column": {
+                      "constraints": {
+                        "primaryKey": true,
+                        "primaryKeyName": "UCSBORGANIZATIONS_PK"
+                      },
+                      "name": "ID",
+                      "type": "VARCHAR(255)"
+                    }
+                  },
+                  {
+                    "column": {
+                      "name": "ORG_TRANSLATION_SHORT",
+                      "type": "VARCHAR(255)"
+                    }
+                  },
+                  {
+                    "column": {
+                      "name": "ORG_TRANSLATION",
+                      "type": "VARCHAR(255)"
+                    }
+                  },
+                  {
+                    "column": {
+                      "name": "INACTIVE",
+                      "type": "BOOLEAN"
+                    }
+                  }
+                ],
+                "tableName": "UCSBORGANIZATIONS"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
