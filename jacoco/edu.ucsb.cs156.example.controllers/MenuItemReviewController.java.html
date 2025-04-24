@@ -44,8 +44,8 @@ import edu.ucsb.cs156.example.entities.MenuItemReview;
 @Tag(name = &quot;MenuItemReview&quot;)
 @RequestMapping(&quot;/api/menuitemreview&quot;)
 @RestController
-<span class="nc" id="L47">@Slf4j</span>
-<span class="nc" id="L48">public class MenuItemReviewController extends ApiController {</span>
+<span class="fc" id="L47">@Slf4j</span>
+<span class="fc" id="L48">public class MenuItemReviewController extends ApiController {</span>
 
     @Autowired
     MenuItemReviewRepository menuItemReviewRepository;
@@ -59,8 +59,8 @@ import edu.ucsb.cs156.example.entities.MenuItemReview;
     @PreAuthorize(&quot;hasRole('ROLE_USER')&quot;)
     @GetMapping(&quot;/all&quot;)
     public Iterable&lt;MenuItemReview&gt; allReviews() {
-<span class="nc" id="L62">        Iterable&lt;MenuItemReview&gt; menuItemReview = menuItemReviewRepository.findAll();</span>
-<span class="nc" id="L63">        return menuItemReview;</span>
+<span class="fc" id="L62">        Iterable&lt;MenuItemReview&gt; menuItemReview = menuItemReviewRepository.findAll();</span>
+<span class="fc" id="L63">        return menuItemReview;</span>
     }
 
     /**
@@ -85,17 +85,34 @@ import edu.ucsb.cs156.example.entities.MenuItemReview;
         // For an explanation of @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
         // See: https://www.baeldung.com/spring-date-parameters
 
-<span class="nc" id="L88">        log.info(&quot;localDateTime={}&quot;, dateReviewed);</span>
+<span class="fc" id="L88">        log.info(&quot;localDateTime={}&quot;, dateReviewed);</span>
 
-<span class="nc" id="L90">        MenuItemReview menuItemReview = new MenuItemReview();</span>
-<span class="nc" id="L91">        menuItemReview.setComments(comments);</span>
-<span class="nc" id="L92">        menuItemReview.setDateReviewed(dateReviewed);</span>
-<span class="nc" id="L93">        menuItemReview.setReviewerEmail(reviewerEmail);</span>
-<span class="nc" id="L94">        menuItemReview.setStars(stars);</span>
+<span class="fc" id="L90">        MenuItemReview menuItemReview = new MenuItemReview();</span>
+<span class="fc" id="L91">        menuItemReview.setComments(comments);</span>
+<span class="fc" id="L92">        menuItemReview.setDateReviewed(dateReviewed);</span>
+<span class="fc" id="L93">        menuItemReview.setReviewerEmail(reviewerEmail);</span>
+<span class="fc" id="L94">        menuItemReview.setStars(stars);</span>
 
-<span class="nc" id="L96">        MenuItemReview savedMenuItemReview = menuItemReviewRepository.save(menuItemReview);</span>
+<span class="fc" id="L96">        MenuItemReview savedMenuItemReview = menuItemReviewRepository.save(menuItemReview);</span>
 
-<span class="nc" id="L98">        return savedMenuItemReview;</span>
+<span class="fc" id="L98">        return savedMenuItemReview;</span>
+    }
+
+    /**
+     * Get a single menu item review by id
+     * 
+     * @param id the id of the menu item review
+     * @return a MenuItemReview
+     */
+    @Operation(summary= &quot;Get a single menu item review&quot;)
+    @PreAuthorize(&quot;hasRole('ROLE_USER')&quot;)
+    @GetMapping(&quot;&quot;)
+    public MenuItemReview getById(
+            @Parameter(name=&quot;id&quot;) @RequestParam Long id) {
+<span class="nc" id="L112">        MenuItemReview menuItemReview = menuItemReviewRepository.findById(id)</span>
+<span class="nc" id="L113">                .orElseThrow(() -&gt; new EntityNotFoundException(MenuItemReview.class, id));</span>
+
+<span class="nc" id="L115">        return menuItemReview;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
