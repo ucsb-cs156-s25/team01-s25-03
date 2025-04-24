@@ -1,6 +1,7 @@
 package edu.ucsb.cs156.example.controllers;
 
 import static java.lang.Math.log;
+import static java.rmi.server.LogStream.log;
 
 import edu.ucsb.cs156.example.entities.UCSBDate;
 import edu.ucsb.cs156.example.errors.EntityNotFoundException;
@@ -29,6 +30,10 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 import java.time.LocalDateTime;
+
+import static org.hibernate.query.sqm.tree.SqmNode.log;
+
+import static com.github.jknack.handlebars.Handlebars.log;
 
 import edu.ucsb.cs156.example.entities.MenuItemReview;
 
@@ -72,9 +77,9 @@ public class MenuItemReviewController extends ApiController {
     @PostMapping("/post")
     public MenuItemReview postMenuItemReview(
             @Parameter(name="reviewerEmail") @RequestParam String reviewerEmail,
-            @Parameter(name="comments") @RequestParam String comments,
             @Parameter(name="stars") @RequestParam int stars,
-            @Parameter(name="dateReviewed", description="date (in iso format, e.g. YYYY-mm-ddTHH:MM:SS; see https://en.wikipedia.org/wiki/ISO_8601)") @RequestParam("dateReviewed") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateReviewed)
+            @Parameter(name="dateReviewed", description="date (in iso format, e.g. YYYY-mm-ddTHH:MM:SS; see https://en.wikipedia.org/wiki/ISO_8601)") @RequestParam("dateReviewed") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateReviewed,
+            @Parameter(name="comments") @RequestParam String comments)
             throws JsonProcessingException {
 
         // For an explanation of @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)

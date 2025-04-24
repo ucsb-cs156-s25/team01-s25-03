@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Entity(name = "menuitemreview")
+@Entity(name = "MenuItemReview")
 public class MenuItemReview {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,8 +31,4 @@ public class MenuItemReview {
   private int stars;
   private LocalDateTime dateReviewed;
   private String comments;
-
-  public void setComments(String comments_input) {
-        comments = comments_input;
-    }
 }
