@@ -1,5 +1,7 @@
 package edu.ucsb.cs156.example.controllers;
 
+import static java.lang.Math.log;
+
 import edu.ucsb.cs156.example.entities.UCSBDate;
 import edu.ucsb.cs156.example.errors.EntityNotFoundException;
 import edu.ucsb.cs156.example.repositories.MenuItemReviewRepository;

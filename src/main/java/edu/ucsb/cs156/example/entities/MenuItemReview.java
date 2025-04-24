@@ -31,4 +31,8 @@ public class MenuItemReview {
   private int stars;
   private LocalDateTime dateReviewed;
   private String comments;
+
+  public void setComments(String comments_input) {
+        comments = comments_input;
+    }
 }
