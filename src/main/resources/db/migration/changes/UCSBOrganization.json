@@ -2,7 +2,7 @@
     "databaseChangeLog": [
       {
         "changeSet": {
-          "id": "UCSBOrgs-1",
+          "id": "UCSBOrgs-4",
           "author": "KadeW",
           "preConditions": [
             {
@@ -12,7 +12,7 @@
               "not": [
                 {
                   "tableExists": {
-                    "tableName": "UCSBORGANIZATIONS"
+                    "tableName": "UCSBORGANIZATION"
                   }
                 }
               ]
@@ -26,9 +26,9 @@
                     "column": {
                       "constraints": {
                         "primaryKey": true,
-                        "primaryKeyName": "UCSBORGANIZATIONS_PK"
+                        "primaryKeyName": "UCSBORGANIZATION_PK"
                       },
-                      "name": "ID",
+                      "name": "ORG_CODE",
                       "type": "VARCHAR(255)"
                     }
                   },
@@ -51,7 +51,7 @@
                     }
                   }
                 ],
-                "tableName": "UCSBORGANIZATIONS"
+                "tableName": "UCSBORGANIZATION"
               }
             }
           ]
