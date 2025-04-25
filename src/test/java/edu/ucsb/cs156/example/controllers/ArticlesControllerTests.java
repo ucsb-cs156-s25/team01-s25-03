@@ -284,4 +284,54 @@ public class ArticlesControllerTests extends ControllerTestCase {
             assertEquals("Article with id 67 not found", json.get("message"));
 
     }
+
+    @WithMockUser(roles = { "ADMIN", "USER" })
+    @Test
+    public void admin_can_delete_an_article() throws Exception {
+            // arrange
+
+            LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
+
+            Article article1 = Article.builder()
+                .title("Deploying a Dokku App")
+                .url("https://ucsb-cs156.github.io/topics/dokku/deploying_simple_app.html")
+                .explanation("Step-by-step on how to deploy a Dokku app")
+                .email("karena_lai@ucsb.edu")
+                .dateAdded(ldt1)
+                .build();
+
+            when(articlesRepository.findById(eq(123L))).thenReturn(Optional.of(article1));
+
+            // act
+            MvcResult response = mockMvc.perform(
+                            delete("/api/articles?id=123")
+                                            .with(csrf()))
+                            .andExpect(status().isOk()).andReturn();
+
+            // assert
+            verify(articlesRepository, times(1)).findById(123L);
+            verify(articlesRepository, times(1)).delete(any());
+
+            Map<String, Object> json = responseToJson(response);
+            assertEquals("Article with id 123 deleted", json.get("message"));
+    }
+    @WithMockUser(roles = { "ADMIN", "USER" })
+    @Test
+    public void admin_tries_to_delete_non_existant_article_and_gets_right_error_message()
+                    throws Exception {
+            // arrange
+
+            when(articlesRepository.findById(eq(123L))).thenReturn(Optional.empty());
+
+            // act
+            MvcResult response = mockMvc.perform(
+                            delete("/api/articles?id=123")
+                                            .with(csrf()))
+                            .andExpect(status().isNotFound()).andReturn();
+
+            // assert
+            verify(articlesRepository, times(1)).findById(123L);
+            Map<String, Object> json = responseToJson(response);
+            assertEquals("Article with id 123 not found", json.get("message"));
+    }
 }
