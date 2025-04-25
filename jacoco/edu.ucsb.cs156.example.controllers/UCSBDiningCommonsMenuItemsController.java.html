@@ -35,8 +35,8 @@ import java.time.LocalDateTime;
 @Tag(name = &quot;UCSBDiningCommonsMenuItems&quot;)
 @RequestMapping(&quot;/api/ucsbdiningcommonsmenuitems&quot;)
 @RestController
-<span class="nc" id="L38">@Slf4j</span>
-<span class="nc" id="L39">public class UCSBDiningCommonsMenuItemsController extends ApiController {</span>
+<span class="fc" id="L38">@Slf4j</span>
+<span class="fc" id="L39">public class UCSBDiningCommonsMenuItemsController extends ApiController {</span>
 
     @Autowired
     UCSBDiningCommonsMenuItemRepository ucsbDiningCommonsMenuItemRepository;
@@ -50,8 +50,8 @@ import java.time.LocalDateTime;
     @PreAuthorize(&quot;hasRole('ROLE_USER')&quot;)
     @GetMapping(&quot;/all&quot;)
     public Iterable&lt;UCSBDiningCommonsMenuItem&gt; allUCSBDiningCommonsMenuItems() {
-<span class="nc" id="L53">        Iterable&lt;UCSBDiningCommonsMenuItem&gt; menuItems = ucsbDiningCommonsMenuItemRepository.findAll();</span>
-<span class="nc" id="L54">        return menuItems;</span>
+<span class="fc" id="L53">        Iterable&lt;UCSBDiningCommonsMenuItem&gt; menuItems = ucsbDiningCommonsMenuItemRepository.findAll();</span>
+<span class="fc" id="L54">        return menuItems;</span>
     }
 
     /**
@@ -74,16 +74,16 @@ import java.time.LocalDateTime;
         // For an explanation of @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
         // See: https://www.baeldung.com/spring-date-parameters
 
-<span class="nc" id="L77">        log.info(&quot;name={}&quot;, name);</span>
+<span class="fc" id="L77">        log.info(&quot;name={}&quot;, name);</span>
 
-<span class="nc" id="L79">        UCSBDiningCommonsMenuItem ucsbDiningCommonsMenuItem = new UCSBDiningCommonsMenuItem();</span>
-<span class="nc" id="L80">        ucsbDiningCommonsMenuItem.setDiningCommonsCode(diningCommonsCode);</span>
-<span class="nc" id="L81">        ucsbDiningCommonsMenuItem.setName(name);</span>
-<span class="nc" id="L82">        ucsbDiningCommonsMenuItem.setStation(station);</span>
+<span class="fc" id="L79">        UCSBDiningCommonsMenuItem ucsbDiningCommonsMenuItem = new UCSBDiningCommonsMenuItem();</span>
+<span class="fc" id="L80">        ucsbDiningCommonsMenuItem.setDiningCommonsCode(diningCommonsCode);</span>
+<span class="fc" id="L81">        ucsbDiningCommonsMenuItem.setName(name);</span>
+<span class="fc" id="L82">        ucsbDiningCommonsMenuItem.setStation(station);</span>
 
-<span class="nc" id="L84">        UCSBDiningCommonsMenuItem savedUcsbDiningCommonsMenuItem = ucsbDiningCommonsMenuItemRepository.save(ucsbDiningCommonsMenuItem);</span>
+<span class="fc" id="L84">        UCSBDiningCommonsMenuItem savedUcsbDiningCommonsMenuItem = ucsbDiningCommonsMenuItemRepository.save(ucsbDiningCommonsMenuItem);</span>
 
-<span class="nc" id="L86">        return savedUcsbDiningCommonsMenuItem;</span>
+<span class="fc" id="L86">        return savedUcsbDiningCommonsMenuItem;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
