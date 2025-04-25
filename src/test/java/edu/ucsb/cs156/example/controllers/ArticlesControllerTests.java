@@ -62,7 +62,6 @@ public class ArticlesControllerTests extends ControllerTestCase {
     }
 
     // Authorization tests for /api/ucsbdiningcommons/post
-    // (Perhaps should also have these for put and delete)
 
     @Test
     public void logged_out_users_cannot_post() throws Exception {
