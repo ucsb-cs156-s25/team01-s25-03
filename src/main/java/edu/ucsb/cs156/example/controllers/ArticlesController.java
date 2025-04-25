@@ -110,4 +110,32 @@ import java.time.LocalDateTime;
         return savedArticle;
     }
 
+   /**
+     * Update a single Article
+     * 
+     * @param id       id of the Article to update
+     * @param incoming the new Article
+     * @return the updated Article object
+     */
+    @Operation(summary= "Update a single article")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PutMapping("")
+    public Article updateArticle(
+            @Parameter(name="id") @RequestParam Long id,
+            @RequestBody @Valid Article incoming) {
+
+        Article article = articlesRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(Article.class, id));
+
+        article.setTitle(incoming.getTitle());
+        article.setUrl(incoming.getUrl());
+        article.setExplanation(incoming.getExplanation());
+        article.setEmail(incoming.getEmail());
+        article.setDateAdded(incoming.getDateAdded());
+
+        articlesRepository.save(article);
+
+        return article;
+    }
+
  }
