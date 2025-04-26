@@ -106,10 +106,10 @@ import java.time.LocalDateTime;
     @GetMapping(&quot;&quot;)
     public RecommendationRequest getById(
             @Parameter(name=&quot;id&quot;) @RequestParam Long id) {
-<span class="nc" id="L109">        RecommendationRequest recommendationRequest = recommendationRequestRepository.findById(id)</span>
-<span class="nc" id="L110">                .orElseThrow(() -&gt; new EntityNotFoundException(RecommendationRequest.class, id));</span>
+<span class="fc" id="L109">        RecommendationRequest recommendationRequest = recommendationRequestRepository.findById(id)</span>
+<span class="fc" id="L110">                .orElseThrow(() -&gt; new EntityNotFoundException(RecommendationRequest.class, id));</span>
 
-<span class="nc" id="L112">        return recommendationRequest;</span>
+<span class="fc" id="L112">        return recommendationRequest;</span>
     }
 
     /**
