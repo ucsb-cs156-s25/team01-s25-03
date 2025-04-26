@@ -17,12 +17,17 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
+import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MvcResult;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.eq;
@@ -145,7 +150,8 @@ public class UCSBDiningCommonsMenuItemsControllerTests extends ControllerTestCas
                                 .station("fruits")
                                 .build();
 
-                when(ucsbDiningCommonsMenuItemRepository.findById(eq(7L))).thenReturn(Optional.of(ucsbDiningCommonsMenuItem));
+                when(ucsbDiningCommonsMenuItemRepository.findById(eq(7L)))
+                                .thenReturn(Optional.of(ucsbDiningCommonsMenuItem));
 
                 // act
                 MvcResult response = mockMvc.perform(get("/api/ucsbdiningcommonsmenuitems?id=7"))
