@@ -12,16 +12,15 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 /**
- * This is a JPA entity that represents a UCSBDate, i.e. an entry
- * that comes from the UCSB API for academic calendar dates.
+ * This is a JPA entity that represents a HelpRequest
  */
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Entity(name = "ucsbdates")
-public class UCSBDate {
+@Entity(name = "helprequests")
+public class HelpRequest {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
