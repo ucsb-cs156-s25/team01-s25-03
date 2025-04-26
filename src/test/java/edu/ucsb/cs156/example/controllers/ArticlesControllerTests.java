@@ -309,7 +309,7 @@ public class ArticlesControllerTests extends ControllerTestCase {
 
             // assert
             verify(articlesRepository, times(1)).findById(123L);
-            verify(articlesRepository, times(1)).delete(any());
+            verify(articlesRepository, times(1)).delete(eq(article1));
 
             Map<String, Object> json = responseToJson(response);
             assertEquals("Article with id 123 deleted", json.get("message"));
