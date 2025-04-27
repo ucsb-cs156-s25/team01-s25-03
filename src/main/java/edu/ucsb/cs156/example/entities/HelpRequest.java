@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import java.time.ZonedDateTime;
 import java.time.LocalDateTime;
 
 /**
@@ -28,7 +28,7 @@ public class HelpRequest {
 private String requesterEmail;
 private String teamId;
 private String tableOrBreakoutRoom;
-private LocalDateTime requestTime;
+private ZonedDateTime requestTime;
 private String explanation;
 private boolean solved;
 }
