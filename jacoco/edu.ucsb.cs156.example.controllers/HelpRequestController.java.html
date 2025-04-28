@@ -117,9 +117,9 @@ import java.time.LocalDateTime;
     public HelpRequest getById(
             @Parameter(name=&quot;id&quot;) @RequestParam Long id) {
 <span class="fc" id="L119">        HelpRequest helpRequest = helpRequestRepository.findById(id)</span>
-<span class="pc" id="L120">                .orElseThrow(() -&gt; new EntityNotFoundException(HelpRequest.class, id));</span>
+<span class="fc" id="L120">                .orElseThrow(() -&gt; new EntityNotFoundException(HelpRequest.class, id));</span>
 
-<span class="nc" id="L122">        return helpRequest;</span>
+<span class="fc" id="L122">        return helpRequest;</span>
     }
 
 
