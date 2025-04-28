@@ -182,6 +182,8 @@ public class HelpRequestsControllerTests extends ControllerTestCase{
                 assertEquals("HelpRequest with id 7 not found", json.get("message"));
         }
 
+        @WithMockUser(roles = { "USER" })
+        @Test
          public void test_that_logged_in_user_can_get_by_id_when_the_id_does_exist() throws Exception {
 
                 ZonedDateTime z1 = ZonedDateTime.parse("2022-01-03T00:00:00Z");
