@@ -83,7 +83,7 @@ public class UCSBOrganizationControllerTests extends ControllerTestCase {
                                 .orgCode("IEEE")
                                 .orgTranslationShort("IEEE")
                                 .orgTranslation("Institute of Electrical and Electronics Engineers")
-                                .inactive(false)
+                                .inactive(true)
                                 .build();
 
                 UCSBOrganization DivingClub = UCSBOrganization.builder()
@@ -112,21 +112,21 @@ public class UCSBOrganizationControllerTests extends ControllerTestCase {
 
         @WithMockUser(roles = { "ADMIN", "USER" })
         @Test
-        public void an_admin_user_can_post_a_new_commons() throws Exception {
+        public void an_admin_user_can_post_a_new_organization() throws Exception {
                 // arrange
 
                 UCSBOrganization ItripleE = UCSBOrganization.builder()
                                 .orgCode("IEEE")
                                 .orgTranslationShort("IEEE")
                                 .orgTranslation("Institute of Electrical and Electronics Engineers")
-                                .inactive(false)
+                                .inactive(true)
                                 .build();
 
                 when(ucsbOrganizationRepository.save(eq(ItripleE))).thenReturn(ItripleE);
 
                 // act
                 MvcResult response = mockMvc.perform(
-                                post("/api/ucsborganization/post?orgCode=IEEE&orgTranslationShort=IEEE&orgTranslation=Institute of Electrical and Electronics Engineers&inactive=false")
+                                post("/api/ucsborganization/post?orgCode=IEEE&orgTranslationShort=IEEE&orgTranslation=Institute of Electrical and Electronics Engineers&inactive=true")
                                                 .with(csrf()))
                                 .andExpect(status().isOk()).andReturn();
 
