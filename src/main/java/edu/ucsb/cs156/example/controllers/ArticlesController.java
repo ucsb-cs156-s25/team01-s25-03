@@ -138,4 +138,21 @@ import java.time.LocalDateTime;
         return article;
     }
 
+    /**
+     * Delete an Article
+     * 
+     * @param id the id of the Article to delete
+     * @return a message indicating the Article was deleted
+     */
+    @Operation(summary= "Delete an Article")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @DeleteMapping("")
+    public Object deleteArticle(
+            @Parameter(name="id") @RequestParam Long id) {
+        Article article = articlesRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(Article.class, id));
+
+        articlesRepository.delete(article);
+        return genericMessage("Article with id %s deleted".formatted(id));
+    }    
  }
