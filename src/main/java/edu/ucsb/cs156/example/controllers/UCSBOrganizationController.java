@@ -37,8 +37,8 @@ public class UCSBOrganizationController {
     UCSBOrganizationRepository ucsbOrganizationRepository;
 
     /**
-     * THis method returns a list of all ucsbdiningcommons.
-     * @return a list of all ucsbdiningcommons
+     * This method returns a list of all ucsborganizations.
+     * @return a list of all ucsborganizations
      */
     @Operation(summary= "List all ucsb oranizations")
     @PreAuthorize("hasRole('ROLE_USER')")
@@ -49,31 +49,12 @@ public class UCSBOrganizationController {
     }
 
     /**
-     * This method returns a single diningcommons.
-     * @param code code of the diningcommons
-     * @return a single diningcommons
-     */
-    // @Operation(summary= "Get a single commons")
-    // @PreAuthorize("hasRole('ROLE_USER')")
-    // @GetMapping("")
-    // public UCSBDiningCommons getById(
-    //         @Parameter(name="code") @RequestParam String code) {
-    //     UCSBDiningCommons commons = ucsbDiningCommonsRepository.findById(code)
-    //             .orElseThrow(() -> new EntityNotFoundException(UCSBDiningCommons.class, code));
-
-    //     return commons;
-    // }
-
-    /**
-     * This method creates a new diningcommons. Accessible only to users with the role "ROLE_ADMIN".
-     * @param code code of the diningcommons
-     * @param name name of the diningcommons
-     * @param hasSackMeal whether or not the commons has sack meals
-     * @param hasTakeOutMeal whether or not the commons has take out meals
-     * @param hasDiningCam whether or not the commons has a dining cam
-     * @param latitude latitude of the commons
-     * @param longitude logitude of the commons
-     * @return the save diningcommons
+     * This method creates a new organization. Accessible only to users with the role "ROLE_ADMIN".
+     * @param orgCode code of the organization
+     * @param orgTranslationShort short translation of the organization name
+     * @param orgTranslation the full translation of the organization name
+     * @param inactive whether or not the organization is inactive
+     * @return the save organization
      */
     @Operation(summary= "Create a new organization")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -96,50 +77,4 @@ public class UCSBOrganizationController {
 
         return savedOrganization;
     }
-
-    /**
-     * Delete a diningcommons. Accessible only to users with the role "ROLE_ADMIN".
-     * @param code code of the commons
-     * @return a message indiciating the commons was deleted
-     */
-    // @Operation(summary= "Delete a UCSBDiningCommons")
-    // @PreAuthorize("hasRole('ROLE_ADMIN')")
-    // @DeleteMapping("")
-    // public Object deleteCommons(
-    //         @Parameter(name="code") @RequestParam String code) {
-    //     UCSBDiningCommons commons = ucsbDiningCommonsRepository.findById(code)
-    //             .orElseThrow(() -> new EntityNotFoundException(UCSBDiningCommons.class, code));
-
-    //     ucsbDiningCommonsRepository.delete(commons);
-    //     return genericMessage("UCSBDiningCommons with id %s deleted".formatted(code));
-    // }
-
-    /**
-     * Update a single diningcommons. Accessible only to users with the role "ROLE_ADMIN".
-     * @param code code of the diningcommons
-     * @param incoming the new commons contents
-     * @return the updated commons object
-     */
-    // @Operation(summary= "Update a single commons")
-    // @PreAuthorize("hasRole('ROLE_ADMIN')")
-    // @PutMapping("")
-    // public UCSBDiningCommons updateCommons(
-    //         @Parameter(name="code") @RequestParam String code,
-    //         @RequestBody @Valid UCSBDiningCommons incoming) {
-
-    //     UCSBDiningCommons commons = ucsbDiningCommonsRepository.findById(code)
-    //             .orElseThrow(() -> new EntityNotFoundException(UCSBDiningCommons.class, code));
-
-
-    //     commons.setName(incoming.getName());  
-    //     commons.setHasSackMeal(incoming.getHasSackMeal());
-    //     commons.setHasTakeOutMeal(incoming.getHasTakeOutMeal());
-    //     commons.setHasDiningCam(incoming.getHasDiningCam());
-    //     commons.setLatitude(incoming.getLatitude());
-    //     commons.setLongitude(incoming.getLongitude());
-
-    //     ucsbDiningCommonsRepository.save(commons);
-
-    //     return commons;
-    // }
 }
