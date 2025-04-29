@@ -1,5 +1,6 @@
 package edu.ucsb.cs156.example.controllers;
 
+import edu.ucsb.cs156.example.entities.UCSBDiningCommons;
 import edu.ucsb.cs156.example.entities.UCSBOrganization;
 import edu.ucsb.cs156.example.errors.EntityNotFoundException;
 import edu.ucsb.cs156.example.repositories.UCSBOrganizationRepository;
@@ -32,7 +33,7 @@ import jakarta.validation.Valid;
  @RequestMapping("/api/ucsborganization")
  @RestController
  @Slf4j
-public class UCSBOrganizationController {
+public class UCSBOrganizationController extends ApiController {
     @Autowired
     UCSBOrganizationRepository ucsbOrganizationRepository;
 
@@ -45,6 +46,22 @@ public class UCSBOrganizationController {
     @GetMapping("/all")
     public Iterable<UCSBOrganization> allOrganizations() {
         Iterable<UCSBOrganization> organization = ucsbOrganizationRepository.findAll();
+        return organization;
+    }
+
+    /**
+     * This method returns a single organization.
+     * @param orgCode org code of the organization
+     * @return a single organization
+     */
+    @Operation(summary= "Get a single organization")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping("")
+    public UCSBOrganization getById(
+            @Parameter(name="orgCode") @RequestParam String orgCode) {
+        UCSBOrganization organization = ucsbOrganizationRepository.findById(orgCode)
+                .orElseThrow(() -> new EntityNotFoundException(UCSBOrganization.class, orgCode));
+
         return organization;
     }
 
