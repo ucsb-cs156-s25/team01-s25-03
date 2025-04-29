@@ -192,5 +192,76 @@ public class UCSBOrganizationControllerTests extends ControllerTestCase {
                 assertEquals(expectedJson, responseString);
         }
 
+
+        @WithMockUser(roles = { "ADMIN", "USER" })
+        @Test
+        public void admin_can_edit_an_existing_organization() throws Exception {
+                // arrange
+
+                UCSBOrganization ItripleE = UCSBOrganization.builder()
+                                .orgCode("IEEE")
+                                .orgTranslationShort("IEEE")
+                                .orgTranslation("Institute of Electrical and Electronics Engineers")
+                                .inactive(true)
+                                .build();
+
+                UCSBOrganization ItripleE_Edited = UCSBOrganization.builder()
+                                .orgCode("IEEE")
+                                .orgTranslationShort("IEEE-Engineering")
+                                .orgTranslation("Institute of Electrical and Electronics Engineers - edited")
+                                .inactive(false)
+                                .build();
+
+                String requestBody = mapper.writeValueAsString(ItripleE_Edited);
+
+                when(ucsbOrganizationRepository.findById(eq("IEEE"))).thenReturn(Optional.of(ItripleE));
+
+                // act
+                MvcResult response = mockMvc.perform(
+                                put("/api/ucsborganization?orgCode=IEEE")
+                                                .contentType(MediaType.APPLICATION_JSON)
+                                                .characterEncoding("utf-8")
+                                                .content(requestBody)
+                                                .with(csrf()))
+                                .andExpect(status().isOk()).andReturn();
+
+                // assert
+                verify(ucsbOrganizationRepository, times(1)).findById("IEEE");
+                verify(ucsbOrganizationRepository, times(1)).save(ItripleE_Edited); // should be saved with updated info
+                String responseString = response.getResponse().getContentAsString();
+                assertEquals(requestBody, responseString);
+        }
+
+        @WithMockUser(roles = { "ADMIN", "USER" })
+        @Test
+        public void admin_cannot_edit_organization_that_does_not_exist() throws Exception {
+                // arrange
+
+                UCSBOrganization ItripleE_Edited = UCSBOrganization.builder()
+                                .orgCode("IEEE")
+                                .orgTranslationShort("IEEE-Engineering")
+                                .orgTranslation("Institute of Electrical and Electronics Engineers - edited")
+                                .inactive(false)
+                                .build();
+
+                String requestBody = mapper.writeValueAsString(ItripleE_Edited);
+
+                when(ucsbOrganizationRepository.findById(eq("IEEE"))).thenReturn(Optional.empty());
+
+                // act
+                MvcResult response = mockMvc.perform(
+                                put("/api/ucsborganization?orgCode=IEEE")
+                                                .contentType(MediaType.APPLICATION_JSON)
+                                                .characterEncoding("utf-8")
+                                                .content(requestBody)
+                                                .with(csrf()))
+                                .andExpect(status().isNotFound()).andReturn();
+
+                // assert
+                verify(ucsbOrganizationRepository, times(1)).findById("IEEE");
+                Map<String, Object> json = responseToJson(response);
+                assertEquals("UCSBOrganization with id IEEE not found", json.get("message"));
+
+        }
         
 }
